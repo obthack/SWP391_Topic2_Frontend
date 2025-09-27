@@ -1,0 +1,11 @@
+1. folder src: nơi chứa code
+2. package. json: nơi quản lý thông tin của project
+
+3. SPA => Single Page Application
+=> index.html
+> mỗi khi chuyển trang ko đổi html
+> chỉ đổi nội dung trong html cũ th
+
+Lenh
+1, npm install : tai thu vien (dung 1 lan khi moi tao project)
+2. npm run dev : dung moi khi muon run project
