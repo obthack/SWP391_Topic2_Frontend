@@ -1,14 +1,15 @@
-// Dashboard/index.jsx - Dashboard cho Admin với sidebar navigation
+// MemberDashboard/index.jsx - Dashboard cho Member với navigation khác
 import React, { useState } from 'react';
 import {
-  CarOutlined,
-  TagsOutlined,
+  SearchOutlined,
+  PlusOutlined,
   UserOutlined,
+  UnorderedListOutlined,
   TransactionOutlined,
-  BarChartOutlined,
+  HeartOutlined,
   LogoutOutlined,
 } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu, theme, Button, Avatar, Dropdown } from 'antd';
+import { Breadcrumb, Layout, Menu, theme, Avatar, Dropdown } from 'antd';
 import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
@@ -24,16 +25,17 @@ function getItem(label, key, icon, children) {
   };
 }
 
-// Định nghĩa các menu items cho admin
+// Định nghĩa các menu items cho member
 const items = [
-  getItem('Quản lý Xe/Pin', '/admin/bikes', <CarOutlined />),
-  getItem('Quản lý Danh mục', '/admin/categories', <TagsOutlined />),
-  getItem('Quản lý Người dùng', '/admin/users', <UserOutlined />),
-  getItem('Quản lý Giao dịch', '/admin/transactions', <TransactionOutlined />),
-  getItem('Báo cáo & Thống kê', '/admin/reports', <BarChartOutlined />),
+  getItem('Tìm kiếm & Mua', '/member/search-buy', <SearchOutlined />),
+  getItem('Đăng tin bán', '/member/post-listing', <PlusOutlined />),
+  getItem('Tin đăng của tôi', '/member/my-listings', <UnorderedListOutlined />),
+  getItem('Yêu thích', '/member/favorites', <HeartOutlined />),
+  getItem('Lịch sử giao dịch', '/member/transactions', <TransactionOutlined />),
+  getItem('Thông tin cá nhân', '/member/profile', <UserOutlined />),
 ];
 
-const Dashboard = () => {
+const MemberDashboard = () => {
   const [collapsed, setCollapsed] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -56,6 +58,7 @@ const Dashboard = () => {
         key: 'profile',
         icon: <UserOutlined />,
         label: 'Thông tin cá nhân',
+        onClick: () => navigate('/member/profile'),
       },
       {
         key: 'logout',
@@ -70,12 +73,13 @@ const Dashboard = () => {
   const getBreadcrumbItems = () => {
     const pathSegments = location.pathname.split('/').filter(Boolean);
     const breadcrumbMap = {
-      admin: 'Quản trị',
-      bikes: 'Quản lý Xe/Pin',
-      categories: 'Quản lý Danh mục',
-      users: 'Quản lý Người dùng',
-      transactions: 'Quản lý Giao dịch',
-      reports: 'Báo cáo & Thống kê',
+      member: 'Thành viên',
+      'search-buy': 'Tìm kiếm & Mua',
+      'post-listing': 'Đăng tin bán',
+      'my-listings': 'Tin đăng của tôi',
+      favorites: 'Yêu thích',
+      transactions: 'Lịch sử giao dịch',
+      profile: 'Thông tin cá nhân',
     };
 
     return pathSegments.map(segment => ({
@@ -90,12 +94,12 @@ const Dashboard = () => {
         collapsible 
         collapsed={collapsed} 
         onCollapse={value => setCollapsed(value)}
-        theme="dark"
+        theme="light"
       >
         <div style={{ 
           height: 32, 
           margin: 16, 
-          background: 'rgba(255, 255, 255, 0.3)',
+          background: '#1890ff',
           borderRadius: 6,
           display: 'flex',
           alignItems: 'center',
@@ -106,7 +110,7 @@ const Dashboard = () => {
           {collapsed ? 'EV' : 'EV Trading'}
         </div>
         <Menu 
-          theme="dark" 
+          theme="light" 
           selectedKeys={[location.pathname]} 
           mode="inline" 
           items={items} 
@@ -121,11 +125,12 @@ const Dashboard = () => {
             background: colorBgContainer,
             display: 'flex',
             justifyContent: 'space-between',
-            alignItems: 'center'
+            alignItems: 'center',
+            borderBottom: '1px solid #f0f0f0'
           }}
         >
           <h2 style={{ margin: 0, color: '#1890ff' }}>
-            Admin Dashboard
+            Nền tảng giao dịch xe điện & pin
           </h2>
           
           {/* User info và logout */}
@@ -133,7 +138,7 @@ const Dashboard = () => {
             <span>Xin chào, {user?.name}</span>
             <Dropdown menu={userMenu} placement="bottomRight">
               <Avatar 
-                style={{ backgroundColor: '#1890ff', cursor: 'pointer' }}
+                style={{ backgroundColor: '#52c41a', cursor: 'pointer' }}
                 icon={<UserOutlined />}
               />
             </Dropdown>
@@ -161,11 +166,11 @@ const Dashboard = () => {
 
         {/* Footer */}
         <Footer style={{ textAlign: 'center' }}>
-          EV Trading Platform ©{new Date().getFullYear()} - Admin Panel
+          EV Trading Platform ©{new Date().getFullYear()} - Nền tảng giao dịch xe điện & pin
         </Footer>
       </Layout>
     </Layout>
   );
 };
 
-export default Dashboard;
+export default MemberDashboard;
