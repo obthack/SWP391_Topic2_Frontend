@@ -1,0 +1,50 @@
+/* auth.css - Styles cho các trang authentication */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+.auth-card .ant-card-head-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1890ff;
+}
+
+.demo-accounts {
+  background: #f0f2f5;
+  padding: 12px;
+  border-radius: 6px;
+  margin: 16px 0;
+  font-size: 12px;
+}
+
+.demo-accounts h4 {
+  margin: 0 0 8px 0;
+  color: #666;
+}
+
+.demo-accounts p {
+  margin: 4px 0;
+  color: #888;
+}
+
+.auth-links {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.auth-links .ant-btn-link {
+  padding: 0;
+}
